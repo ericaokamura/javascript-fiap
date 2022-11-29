@@ -5,40 +5,48 @@ console.log(texto);
 //Cidades
 
 var cidadesTotal = texto.split('*');
+
 var cidades = cidadesTotal.filter(filtroCidades);
 
 function filtroCidades(cidade) {
 	return !cidade.startsWith("</b>") && !cidade.startsWith("<html>");
 }
 
-
 console.log(cidades);
+
 
 //Roteiros A
 
 var roteirosTotal = texto.split('#');
-var roteiros = roteirosTotal.filter(filtroRoteiros);
 
+var roteiros = roteirosTotal.filter(filtroRoteiros);
 
 function filtroRoteiros(roteiro) {
 	return roteiro.startsWith("Roteiro A");
 }
 
-console.log(roteiros);
+var roteirosA = roteiros.map(mapRoteiros);
+
+function mapRoteiros(roteiro){
+	return roteiro.slice(0,roteiro.length-4);
+}
+
+console.log(roteirosA);
 
 
 //Locais de cada Roteiro A
 
-var locais = roteiros.map(filtroLocais);
+var locais = roteiros.map(mapLocais);
 
 
-function filtroLocais(roteiro) {
+function mapLocais(roteiro) {
 	let local = roteiro.split("<br>");
 	//console.log(local[1].split(";"));
 	return local[1].split(";");
 }
 
 console.log(locais);
+
 
 // Pontos turísticos do bairro Centro de São Paulo
 
@@ -48,12 +56,13 @@ var pontos = pontosCentroSP[1].split("<br>");
 console.log(pontos[1].split(";"));
 
 
-
 // Pontos turísticos do bairro Downtown de Los Angeles
 
-var pontosDowntownSP = texto.split("Região: Downtown");
-var pontosDT = pontosDowntownSP[1].split("<br>");
+var pontosDowntownLA = texto.split("Região: Downtown");
+var pontosDT = pontosDowntownLA[1].split("<br>");
 
 console.log(pontosDT[1].split(";"));
+
+
 
 
